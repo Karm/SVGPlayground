@@ -26,12 +26,12 @@
 #        look though it might not be desired.
 # (1, 0) = totally sorted   - appealing border, very dense center, sparse midradius
 # (0, 1), (1, 1) = totally randomized  - well packed center, ragged border
-SORT_PARAM_1 = .80 
-SORT_PARAM_2 = .20 
+SORT_PARAM_1 = .70 
+SORT_PARAM_2 = .30 
 
 # These constants control how close our points are placed to each other
-RADIAL_RESOLUTION = .4
-ANGULAR_RESOLUTION = .4
+RADIAL_RESOLUTION = .8
+ANGULAR_RESOLUTION = .8
 
 # This keeps the boundaries from touching (space between boundaries)
 PADDING = 2
@@ -56,9 +56,9 @@ COLOR_STROKE = "#000000"
 # line and get e.g. some micro circles:
 #    {'min_radius': 1, 'max_radius': 3, 'how_many': 40 },
 CIRCLES = [
-{'min_radius': 40, 'max_radius': 100, 'how_many': 3 },
+{'min_radius': 40, 'max_radius': 80, 'how_many': 2 },
 {'min_radius': 20, 'max_radius': 35, 'how_many': 20 },
-{'min_radius': 5, 'max_radius': 18, 'how_many': 100 }
+{'min_radius': 5, 'max_radius': 10, 'how_many': 300 }
 ]
 
 # Output for our svg
