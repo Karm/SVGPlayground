@@ -2,6 +2,7 @@ SVGPlayground
 =============
 
 Some Python generated SVG pie charts and shit
+Ad Circles: Big kudos to http://stackoverflow.com/users/376728/aaronasterling
 
 Examples
 --------
