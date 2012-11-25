@@ -7,6 +7,6 @@ Ad Circles: Big kudos to http://stackoverflow.com/users/376728/aaronasterling
 
 Examples
 --------
-![Hovno](http://karms.biz/share/circle3.svg)
-![Hovno](http://karms.biz/share/circle2.svg)
-![Hovno](http://karms.biz/share/circle.svg)
+![Example 1](http://karms.biz/share/circle6.svg)
+![Example 2](http://karms.biz/share/circle3.svg)
+![Example 3](http://karms.biz/share/circle.svg)
