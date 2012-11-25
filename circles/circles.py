@@ -19,12 +19,47 @@ X = 0
 Y = 1
 # next to each other, not = 1 on top of each other
 RADIUS = 2
+def rgb_to_hex(rgb):
+    return '#%02x%02x%02x' % rgb
 
 def plotCircles(circles):
     et.register_namespace("svg","http://www.w3.org/2000/svg")
-    doc = et.Element('svg', width=str(CANVAS_WIDTH), height=str(CANVAS_HEIGHT), version='1.1', xmlns='http://www.w3.org/2000/svg')
+    doc = et.Element('svg',  attrib={"onload":"init(evt)", "width":str(CANVAS_WIDTH), "height":str(CANVAS_HEIGHT), "version":'1.1', "xmlns":'http://www.w3.org/2000/svg'})
+
+    style_elem = et.SubElement(doc, 'style')
+    style_elem.text = TOOLTIP_STYLE
+
+    style_elem = et.SubElement(doc, 'script', type="text/ecmascript")
+    style_elem.text = TOOLTIP_SCRIPT
+
+    number = 0
     for circle in circles:
-        et.SubElement(doc, 'circle', cx=str(circle[0]+X_OFFSET), cy=str(circle[1]+Y_OFFSET), r=str(circle[2]), fill=COLOR_FILL, stroke=COLOR_STROKE )
+        if COLOR_FILL is not None:
+            color = COLOR_FILL
+        else:
+                if circle[2] > 40:
+                    colordelta = circle[2]+100
+                else:
+                    colordelta = circle[2]  
+                color = rgb_to_hex((colordelta,30,20))
+
+        et.SubElement(doc, 'circle', 
+            attrib={"id":"element"+str(number), 
+            "cx":str(circle[0]+X_OFFSET), 
+            "cy":str(circle[1]+Y_OFFSET), 
+            "r":str(circle[2]), 
+            "fill":str(color), 
+            "stroke":COLOR_STROKE, 
+            "stroke-width":str(STROKE_WIDTH), 
+            "onmouseover":"evt.target.setAttribute('opacity', '0.5');ShowTooltip(evt, 'Circle number:"+str(number)+" Radius:"+str(circle[2])+"');", 
+            "onmouseout":"evt.target.setAttribute('opacity','1)');HideTooltip(evt);", 
+            "onmousemove":""})
+        number += 1
+
+    et.SubElement(doc, 'rect', attrib={"class":"tooltip_bg", "id":"tooltip_bg", "x":"0", "y":"0", "rx":"4", "ry":"4", "width":"55", "height":"17", "visibility":"hidden"})
+    textelem = et.SubElement(doc, 'text', attrib={"class":"tooltip", "id":"tooltip", "x":"0", "y":"0", "visibility":"hidden"})
+    textelem.text = "Tooltip"
+    
     f = open(OUTPUT_FILE, 'w')
     et.ElementTree(doc).write(f, xml_declaration = True)
     f.close()
